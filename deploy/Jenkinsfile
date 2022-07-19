@@ -1,5 +1,9 @@
 pipeline {
+<<<<<<< HEAD
     agent any
+=======
+  agent any
+>>>>>>> 11a5863dca2c0e595bbde03ebaae52fee28324fa
 
   stages {
     stage('Build') {
@@ -10,4 +14,39 @@ pipeline {
       }
     }
     }
+<<<<<<< HEAD
 }
+=======
+
+
+stage('Package') {
+      steps {
+        script {
+          sh 'echo "Package Stage"'
+        }
+      }
+    }
+
+
+    stage('Deploy') {
+      steps {
+        script {
+          sh 'echo "Deploy Stage"'
+        }
+      }
+    }
+
+
+    stage('CleanUp') {
+      steps {
+        script {
+          sh 'echo "CleanUP Stage"'
+        }
+      }
+    }
+
+
+  }
+}
+
+>>>>>>> 11a5863dca2c0e595bbde03ebaae52fee28324fa
