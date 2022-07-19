@@ -5,6 +5,14 @@ pipeline {
   agent any
 >>>>>>> 11a5863dca2c0e595bbde03ebaae52fee28324fa
 
+  stage('Initial cleanUP') {
+      steps {
+        dir("${WORKSPACE}") {
+          deleteDir()
+        }
+      }
+    }
+
   stages {
     stage('Build') {
       steps {
@@ -35,16 +43,6 @@ stage('Package') {
         }
       }
     }
-
-
-    stage('CleanUp') {
-      steps {
-        script {
-          sh 'echo "CleanUP Stage"'
-        }
-      }
-    }
-
 
   }
 }
