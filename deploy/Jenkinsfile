@@ -19,14 +19,6 @@
       }
     }
 
-    stage('Test') {
-      steps {
-        script {
-          sh 'echo "Clean"'
-        }
-      }
-    }
-
     }
 }
 
