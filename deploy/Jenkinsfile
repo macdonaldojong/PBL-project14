@@ -1,4 +1,4 @@
-   pipeline {
+pipeline {
     agent any
 
   stages {
@@ -9,24 +9,5 @@
         }
       }
     }
-
-
-    stage('Test') {
-      steps {
-        script {
-          sh 'echo "Testing Stage"'
-        }
-      }
-    }
-
-    stage('Test') {
-      steps {
-        script {
-          sh 'echo "Clean"'
-        }
-      }
-    }
-
     }
 }
-
