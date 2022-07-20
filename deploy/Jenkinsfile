@@ -5,49 +5,64 @@ pipeline {
   agent any
 >>>>>>> 11a5863dca2c0e595bbde03ebaae52fee28324fa
 
-  stage('Initial cleanUP') {
-      steps {
-        dir("${WORKSPACE}") {
-          deleteDir()
-        }
-      }
+  environment {
+      ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
     }
 
-  stages {
-    stage('Build') {
-      steps {
-        script {
-          sh 'echo "Building Stage"'
-        }
-      }
+  parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
     }
+<<<<<<< HEAD
+
+  stages{
+      stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+=======
 <<<<<<< HEAD
 =======
     }
 <<<<<<< HEAD
 }
 =======
+>>>>>>> main
 
+      stage('Checkout SCM') {
+         steps{
+            git branch: 'feauture/jenkinspipeline-stages', url: 'https://github.com/macdonaldojong/ansible-project.git'
+         }
+       }
 
-stage('Package') {
-      steps {
-        script {
-          sh 'echo "Package Stage"'
+      stage('Prepare Ansible For Execution') {
+        steps {
+          sh 'echo ${WORKSPACE}' 
+          sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
+        }
+     }
+
+      stage('Run Ansible playbook') {
+        steps {
+           ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev', playbook: 'playbooks/site.yml'
+         }
+      }
+
+      stage('Clean Workspace after build'){
+        steps{
+          cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
         }
       }
-    }
+   }
 
-
-    stage('Deploy') {
-      steps {
-        script {
-          sh 'echo "Deploy Stage"'
-        }
-      }
-    }
-
+<<<<<<< HEAD
+}
+=======
   }
 >>>>>>> fe52f959c0e259f4f95b38e380606714e7940f5f
 }
 
 >>>>>>> 11a5863dca2c0e595bbde03ebaae52fee28324fa
+>>>>>>> main
