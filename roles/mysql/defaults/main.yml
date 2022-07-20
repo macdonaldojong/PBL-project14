@@ -125,11 +125,12 @@ mysql_users:
     password: secret
     priv: '*.*:ALL,GRANT'
 
-#mysql_users:
-#  - name: homestead
-#    host: 172.31.84.216
-#    password: sePret^i
-#    priv: '*.*:ALL,GRANT'
+# private-ip of jenkens since it act as the client/users
+mysql_users:
+ - name: homestead
+   host: 172.31.21.70          
+   password: sePret^i
+   priv: '*.*:ALL,GRANT'
 
 # Replication settings (replication is only enabled if master/user have values).
 mysql_server_id: "1"
